@@ -11,23 +11,29 @@ class Card(val content: Array<String>, val width: Int, val padding: Padding = Pa
     /**
      * Displays a card in stdout.
      */
-    fun draw() {
-        println("+${" -".repeat(width / 2)} +")
-        printYPadding()
+    fun draw(): String {
+        var output = ""
+        output += "+${" -".repeat(width / 2)} +\n"
+        output += printYPadding()
         for (row in content) {
-            print("|${" ".repeat(padding.x)}")
-            print("$row ${" ".repeat(width - row.length - padding.x * 2)}")
-            println("${" ".repeat(padding.x)}|")
+            output += "|" + " ".repeat(padding.x)
+            output += "$row ${" ".repeat(width - row.length - (padding.x * 2))}"
+            output += " ".repeat(padding.x) + "|\n"
         }
-        printYPadding()
-        println("+${" -".repeat(width / 2)} +")
+        output += printYPadding()
+        output += "+${" -".repeat(width / 2)} +"
+
+        return output
     }
 
-    private fun printYPadding() {
+    private fun printYPadding(): String {
+        var result = ""
         var i = 0
         while (i < padding.y) {
-            println("|${" ".repeat(width)} |")
+            result += ("|${" ".repeat(width)} |\n")
             i++
         }
+
+        return result
     }
 }
